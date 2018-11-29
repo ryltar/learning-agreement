@@ -110,7 +110,6 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         this.roles = roles;
     }
 
-
     public User(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
         this.username = username;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);

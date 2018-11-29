@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fges.rizomm.m1iii.learningagreementAPI.provider.AppAuthProvider;
+import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,15 +22,9 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.davidson.epack.converter.AbstractConverter;
-import com.davidson.epack.dto.user.UserDTO;
-import com.davidson.epack.entity.user.User;
-import com.davidson.epack.provider.AppAuthProvider;
-import com.davidson.epack.services.user.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -37,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     @Autowired
     UserServiceImpl userDetailsService;
-    
+
     @Autowired
     AbstractConverter<User, UserDTO> userConverter;
 
@@ -57,8 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.cors()
         		.and()
         		.csrf()
-        		.disable()
-        		.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new BasicAuthenticationEntryPoint())
@@ -86,8 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .anyRequest().permitAll();
     }
     private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-        
-    	
+
+
     	@Override
         public void onAuthenticationSuccess(HttpServletRequest request,
                                             HttpServletResponse response, Authentication authentication)
