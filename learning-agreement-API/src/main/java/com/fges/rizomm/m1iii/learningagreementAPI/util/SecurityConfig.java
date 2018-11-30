@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.provider.AppAuthProvider;
 import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Autowired
     UserServiceImpl userDetailsService;
 
-    @Autowired
-    AbstractConverter<User, UserDTO> userConverter;
-
-    //@Autowired
-    //private RememberMeServices rememberMeServices;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -94,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             response.setContentType("application/json;charset=UTF-8");
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             User user = (User) authentication.getPrincipal();
-            String json = ow.writeValueAsString(userConverter.entityToDTO(user));
+            String json = ow.writeValueAsString(user.entityToDTO());
             response.getWriter().write(json);
         }
     }
