@@ -7,6 +7,8 @@ import {AdminComponent} from './admin/admin.component';
 import {RpiComponent} from './rpi/rpi.component';
 import {StudentComponent} from './student/student.component';
 import {UpComponent} from './up/up.component';
+import {ProfileComponent} from './transversal/profile/profile.component';
+import {ShowProfileComponent} from './transversal/profile/show-profile/show-profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent },
@@ -15,6 +17,9 @@ const appRoutes: Routes = [
   { path: 'rpi', component: RpiComponent },
   { path: 'student', component: StudentComponent },
   { path: 'up', component: UpComponent },
+  { path: 'profile', component: ProfileComponent},
+  { path: 'profile/cuProfile', component: ProfileComponent}
+
 ];
 
 @NgModule({
