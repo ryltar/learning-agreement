@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UrlSerializer} from '@angular/router';
+import {Router, UrlSerializer} from '@angular/router';
 import {User} from '../../User.model';
 
 @Component({
@@ -11,7 +11,7 @@ export class ShowProfileComponent implements OnInit {
 
   @Input() profile: User;
 
-  constructor() {console.table(this.profile) }
+  constructor(private router: Router) {console.table(this.profile) }
 
   ngOnInit() {
   }

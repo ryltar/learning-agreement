@@ -3,12 +3,13 @@ export class User {
   idRole: number;
   lastName: string;
   firstName: string;
-  birthDate: Date;
+  birthDate: string;
   mail: string;
   urlSignature: string;
   password: string;
+  role: string;
 
-  constructor(idUser: number, idRole: number, lastName: string, firstName: string, birthDate: Date, mail: string, urlSignature: string, password: string) {
+  constructor(idUser: number, idRole: number, lastName: string, role: string, firstName: string, birthDate: string, mail: string, urlSignature: string, password: string) {
     this.idUser = idUser;
     this.idRole = idRole;
     this.lastName = lastName;
@@ -17,6 +18,7 @@ export class User {
     this.mail = mail;
     this.urlSignature = urlSignature;
     this.password = password;
+    this.role = role;
   }
 }
 
@@ -25,8 +27,9 @@ export interface IUser {
   idRole: number;
   lastName: string;
   firstName: string;
-  birthDate: Date;
+  birthDate: string;
   mail: string;
   urlSignature: string;
   password: string;
+  role: string;
 }
