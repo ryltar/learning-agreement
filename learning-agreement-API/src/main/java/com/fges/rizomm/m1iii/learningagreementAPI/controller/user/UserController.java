@@ -77,11 +77,6 @@ public class UserController {
 	}
 
 	/*
-	@RequestMapping(value = "admin/getUsers/{idSite}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<UserDTO>> getUsers(@PathVariable("idSite") Long idSite) {
-		return new ResponseEntity<>(userService.getUsers(idSite), HttpStatus.OK);
-	}
-	
 	@RequestMapping(value = "admin/changeUserStatus/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<void> changeUserStatus(@PathVariable("id") Long idUser) {
 		return new ResponseEntity<>(userService.changeUserStatus(idUser), HttpStatus.OK);

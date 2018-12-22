@@ -13,9 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query(" select u from User u  where u.username = ?1")
 	Optional<User> findUserWithName(String name);
-
-	List<User> findByPlaceId(Long idPlace);
-
+	
 	User findByUsername(String email);
 
 	@Query("select u from User u where u.token = ?1 and u.passHasBeenSet = false")

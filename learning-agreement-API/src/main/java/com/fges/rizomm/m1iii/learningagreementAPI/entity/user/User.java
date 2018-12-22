@@ -6,18 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.UserDTO;
 import org.hibernate.annotations.Cascade;
@@ -38,6 +27,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPE_ACCOUNT")
 @Table(name = "Users")
 public class User extends LearningEntity<Long> implements Serializable, UserDetails {
 
