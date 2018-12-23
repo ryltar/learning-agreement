@@ -1,6 +1,5 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.entity.user;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.entity.course.Course;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.spinneret.Spinneret;
 
 import javax.persistence.*;
@@ -12,6 +11,4 @@ public class Student extends User {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     private List<Spinneret> spinnerets;
-    @OneToMany(mappedBy="student")
-    private List<Course> courses;
 }

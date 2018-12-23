@@ -1,6 +1,7 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.entity.host_establishment;
 
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.LearningEntity;
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.form.Form;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Partner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,8 @@ import java.util.List;
 public class HostEstablishment extends LearningEntity<Long> implements Serializable {
     private String name;
     private String country;
-    @OneToMany(mappedBy="hostestablishment")
+    @OneToMany(mappedBy="hostEstablishment")
     private List<Partner> partners;
+    @OneToMany(mappedBy="hostEstablishment")
+    private List<Form> forms;
 }

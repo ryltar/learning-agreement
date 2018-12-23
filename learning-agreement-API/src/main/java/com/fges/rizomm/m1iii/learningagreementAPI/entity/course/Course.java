@@ -1,7 +1,7 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.entity.course;
 
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.LearningEntity;
-import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Student;
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.form.Form;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +23,5 @@ public class Course extends LearningEntity<Long> implements Serializable {
     private int nbrCredit;
     private int nbrEcts;
     @ManyToOne
-    private Student student;
+    private Form form;
 }
