@@ -1,4 +1,8 @@
 mat-card {
-  max-width: 400px;
+  max-width: 800px;
   margin: auto;
+}
+
+img{
+  max-width: 60%;
 }

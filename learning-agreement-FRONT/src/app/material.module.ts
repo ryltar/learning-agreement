@@ -1,11 +1,24 @@
-import {MatButtonModule, MatCardModule, MatFormField, MatFormFieldModule, MatIconModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormField,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule, MatPaginatorModule, MatSortModule,
+  MatTableModule
+} from '@angular/material';
 import {NgModule} from '@angular/core';
+import {FormGroup, FormsModule} from '@angular/forms';
 
 const modules = [
   MatCardModule,
   MatButtonModule,
   MatIconModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
 ];
 
 @NgModule({
