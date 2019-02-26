@@ -9,6 +9,7 @@ import {StudentComponent} from './student/student.component';
 import {UpComponent} from './up/up.component';
 import {ProfileComponent} from './transversal/profile/profile.component';
 import {ShowProfileComponent} from './transversal/profile/show-profile/show-profile.component';
+import { FormComponent } from './transversal/form/form.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent },
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   { path: 'student', component: StudentComponent },
   { path: 'up', component: UpComponent },
   { path: 'profile', component: ProfileComponent},
-  { path: 'profile/cuProfile', component: ProfileComponent}
+  { path: 'profile/cuProfile', component: ProfileComponent},
+  { path: 'form', component: FormComponent}
 
 ];
 
