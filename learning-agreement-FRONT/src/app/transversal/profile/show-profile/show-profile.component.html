@@ -10,7 +10,14 @@
     <p>Signature :</p>
     <img src="{{profile.urlSignature}}" alt="Signature">
 
-    <button mat-button mat-raised-button color="primary">Modifier le mot de passe</button>
+    <button mat-button mat-raised-button color="primary" (click)="changePassword = true">Modifier le mot de passe</button>
+
+    <mat-form-field *ngIf="changePassword">
+      <input matInput placeholder="Mot de passe" type="password" [(ngModel)]="password" name="password">
+    </mat-form-field>
+
+    <button *ngIf="changePassword" mat-button mat-raised-button color="accent" (click)="save()">Enregistrer le nouveau mot de passe</button>
+
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="router.navigateByUrl('/profile/cuProfile')">Modifier</button>

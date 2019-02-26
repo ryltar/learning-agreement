@@ -10,10 +10,15 @@ import {User} from '../../User.model';
 export class ShowProfileComponent implements OnInit {
 
   @Input() profile: User;
+  password: string;
 
   constructor(private router: Router) {console.table(this.profile) }
 
   ngOnInit() {
+  }
+
+  save(){
+    console.log(this.password);
   }
 
 }
