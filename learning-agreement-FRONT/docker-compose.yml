@@ -1,0 +1,11 @@
+version: "2"
+services:
+  front:
+    image: angular:latest
+    container_name: angular_dev
+    ports:
+     - "4200:4200"
+    volumes:
+     - ./:/usr/src/app
+    command: "npm start"
+    tty: true

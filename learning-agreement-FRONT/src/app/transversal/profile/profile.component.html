@@ -1,0 +1,6 @@
+<div *ngIf="crudProfile;else showProfile">
+  modifier
+  <app-cu-profile [profile]="profile"></app-cu-profile>
+</div>
+
+<ng-template #showProfile><app-show-profile [profile]="profile"></app-show-profile></ng-template>
