@@ -1,38 +1,26 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.services.user;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
-
-import com.davidson.epack.dto.user.CreateUserDTO;
-import com.davidson.epack.dto.user.SetPasswordDTO;
-import com.davidson.epack.dto.user.UserDTO;
-import com.davidson.epack.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.UserDTO;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 
-import javax.mail.MessagingException;
-
 public interface UserService {
 
-	UserDTO addUser(CreateUserDTO createUserDto);
-
-	List<UserDTO> getUsers(Long idSite);
+	//List<UserDTO> getUsers(Long idSite);
 
 	User findById(Long idUser);
 
 	UserDTO getUserById(Long id);
 
-	Void changeUserStatus(Long idUser);
+	void changeUserStatus(Long idUser);
 
 	UserDTO getUserDtoByEmail(String email);
 
-	User getUserByEmail(String email);
-
-	void sendEmailForNewPassword(User user) throws UnsupportedEncodingException, MessagingException;
+	User getUserByUsername(String email);
 
 	UserDTO getUserByToken(String token);
 
-	UserDTO setPassword(SetPasswordDTO setPasswordDto);
+	UserDTO setPassword(UserDTO userDTO);
 
 	UserDTO updateUser(UserDTO userDto);
 

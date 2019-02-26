@@ -4,6 +4,7 @@ import {ProfileModule} from './profile/profile.module';
 import {MaterialModule} from '../material.module';
 import {CuProfileComponent} from './profile/cu-profile/cu-profile.component';
 import {ShowProfileComponent} from './profile/show-profile/show-profile.component';
+import {FormModule} from './form/form.module';
 import { UserListComponent } from './user-list/user-list.component';
 import {UserListModule} from './user-list/user-list.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -16,6 +17,7 @@ import {AdminModule} from '../admin/admin.module';
   imports: [
     CommonModule,
     ProfileModule,
+    FormModule,
     UserListModule,
     DashboardModule
   ]

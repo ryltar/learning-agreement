@@ -21,11 +21,13 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	/*
 	@RequestMapping(value = "admin/addUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> addUser(@RequestBody CreateUserDTO createUserDto) {
 		return new ResponseEntity<UserDTO>(userService.addUser(createUserDto), HttpStatus.OK);
 	}
-	
+
+	/*
 	@RequestMapping(value = "sendEmailForNewPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> sendEmailForNewPassword(@RequestBody String email) {
 		User user = userService.getUserByEmail(email);
@@ -43,17 +45,19 @@ public class UserController {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}	
 	}
-	
+	*/
 	
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDto) {
 		return new ResponseEntity<UserDTO>(userService.updateUser(userDto), HttpStatus.OK);
 	}
-	
+
+	/*
 	@RequestMapping(value = "setPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> setPassword(@RequestBody SetPasswordDTO setPasswordDto) {
 		return new ResponseEntity<>(userService.setPassword(setPasswordDto), HttpStatus.OK);
 	}
+	*/
 	
 	@RequestMapping(value = "getUserById/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> getUserById(@PathVariable("id") Long idUser) {
@@ -71,14 +75,16 @@ public class UserController {
 		return new ResponseEntity<>(u, HttpStatus.NOT_FOUND);
 		
 	}
-	
+
+	/*
 	@RequestMapping(value = "admin/getUsers/{idSite}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<UserDTO>> getUsers(@PathVariable("idSite") Long idSite) {
 		return new ResponseEntity<>(userService.getUsers(idSite), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "admin/changeUserStatus/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> changeUserStatus(@PathVariable("id") Long idUser) {
+	public ResponseEntity<void> changeUserStatus(@PathVariable("id") Long idUser) {
 		return new ResponseEntity<>(userService.changeUserStatus(idUser), HttpStatus.OK);
 	}
+	*/
 }

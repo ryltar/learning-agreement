@@ -3,6 +3,7 @@ package com.fges.rizomm.m1iii.learningagreementAPI.entity.user;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.UserDTO;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,19 +49,14 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
 
     private String lastname;
 
+    private String email;
+
+    private String urlSignature;
+
     @JsonIgnore
     private String password;
 
-    @ManyToOne
-    private Place place;
-
-    @ManyToOne
-    @JsonIgnore
-    private SiteGroup siteGroup;
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Order> ordersList;
+    private Date birthdate;
 
     @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
     @Cascade(value = CascadeType.REMOVE)
@@ -134,5 +131,9 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         if (!password.isEmpty()) {
             this.password = BCryptManagerUtil.passwordencoder().encode(password);
         }
+    }
+
+    public UserDTO entityToDTO(){
+        return new UserDTO(this.username, this.firstname, this.lastname, this.roles, this.enabled, this.password);
     }
 }
