@@ -16,10 +16,15 @@ import {MaterialModule} from './material.module';
 import {ProfileService} from './transversal/profile/profile.service';
 import { CuProfileComponent } from './transversal/profile/cu-profile/cu-profile.component';
 import { ShowProfileComponent } from './transversal/profile/show-profile/show-profile.component';
+import { NavComponent } from './nav/nav.component';
+import {AuthService} from './auth.service';
+import {AuthGuard} from './auth.guard';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -27,14 +32,13 @@ import { ShowProfileComponent } from './transversal/profile/show-profile/show-pr
     AppRoutingModule,
     MainModule,
     LoginModule,
-    AdminModule,
     RpiModule,
     StudentModule,
     UpModule,
     TransversalModule,
     MaterialModule
   ],
-  providers: [ProfileService],
+  providers: [ProfileService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

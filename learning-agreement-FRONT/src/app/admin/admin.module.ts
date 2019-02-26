@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
   declarations: [AdminComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [AdminComponent]
 })
 export class AdminModule { }

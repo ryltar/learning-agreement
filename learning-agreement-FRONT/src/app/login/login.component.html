@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Login" [(ngModel)]="login" name="login">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Mot de passe" [(ngModel)]="mdp" name="mdp">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button mat-raised-button color="warning" (click)="go()">Connexion</button>
+  </mat-card-actions>
+</mat-card>

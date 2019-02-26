@@ -6,6 +6,7 @@ import { RpiComponent } from './rpi.component';
   declarations: [RpiComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [RpiComponent]
 })
 export class RpiModule { }

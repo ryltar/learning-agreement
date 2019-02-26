@@ -1,0 +1,4 @@
+<span> {{user.lastName}} {{user.firstName}} - {{user.role}}</span>
+<button mat-button routerLink="/dashboard">Tableau de bord</button>
+<button mat-button mat-raised-button *ngIf="isLoggedIn" (click)="auth.logout()">Logout</button>
+

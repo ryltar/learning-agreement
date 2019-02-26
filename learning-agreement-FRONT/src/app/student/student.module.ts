@@ -6,6 +6,7 @@ import { StudentComponent } from './student.component';
   declarations: [StudentComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [StudentComponent]
 })
 export class StudentModule { }
