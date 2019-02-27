@@ -1,0 +1,12 @@
+<p>{{ showForm.schoolYearStart }}</p>
+<p>{{ showForm.schoolYearEnd }}</p>
+<p>{{ showForm.semester }}</p>
+<p>{{ showForm.signatureDate }}</p>
+<p>{{ showForm.rpi.firstName }}</p>
+<p>{{ showForm.partnet.firstName }}</p>
+<p>Courses :</p>
+<ul>
+    <li *ngFor="let cours of showForm.courses">
+        {{ cours.titleCourse}}
+    </li>
+</ul>
