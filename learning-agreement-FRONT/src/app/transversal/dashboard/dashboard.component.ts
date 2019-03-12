@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
       new User(
       2,
       2,
-      'Longuett',
+      'Longuet',
       'rpi',
       'Vivien',
       '1997-03-21',
