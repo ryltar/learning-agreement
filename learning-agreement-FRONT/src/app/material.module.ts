@@ -5,7 +5,8 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule
+  MatTableModule,
+  MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {FormGroup, FormsModule} from '@angular/forms';
@@ -18,7 +19,8 @@ const modules = [
   MatInputModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatToolbarModule
 ];
 
 @NgModule({
