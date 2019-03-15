@@ -1,4 +1,15 @@
-<span> {{user.lastName}} {{user.firstName}} - {{user.role}}</span>
-<button mat-button routerLink="/dashboard">Tableau de bord</button>
-<button mat-button mat-raised-button *ngIf="isLoggedIn" (click)="auth.logout()">Logout</button>
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+  <span>{{user.lastName}} {{user.firstName}} - {{user.role}}</span>
+  <span class="example-spacer"></span>
+  <mat-icon routerLink="/dashboard" class="example-icon">person_add</mat-icon>
+  <mat-icon routerLink="/dashboard" class="example-icon">group</mat-icon>
+  <mat-icon routerLink="/dashboard" class="example-icon">note_add</mat-icon>
+  <mat-icon routerLink="/dashboard" class="example-icon">assignment</mat-icon>
+
+    <button mat-button mat-raised-button *ngIf="isLoggedIn" (click)="auth.logout()">Logout</button>
+</mat-toolbar-row>
+</mat-toolbar>
+
 
