@@ -13,6 +13,8 @@ import { FormComponent } from './transversal/form/form.component';
 import {AuthGuard} from './auth.guard';
 import {AuthService} from './auth.service';
 import {DashboardComponent} from './transversal/dashboard/dashboard.component';
+import { ShowFormComponent } from './transversal/form/show-form/show-form.component';
+import { CuFormComponent } from './transversal/form/cu-form/cu-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent , canActivate: [AuthGuard]},
@@ -24,6 +26,8 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'profile/cuProfile', component: ProfileComponent},
   { path: 'form', component: FormComponent},
+  { path: 'form/show', component: ShowFormComponent},
+  { path: 'form/cuForm', component: CuFormComponent},
   { path: 'up', component: UpComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'profile/cuProfile', component: ProfileComponent, canActivate: [AuthGuard]},
