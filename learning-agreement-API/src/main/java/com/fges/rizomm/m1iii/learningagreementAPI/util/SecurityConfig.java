@@ -2,14 +2,13 @@ package com.fges.rizomm.m1iii.learningagreementAPI.util;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.provider.AppAuthProvider;
-import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserServiceImpl;
+import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     @Autowired
-    UserServiceImpl userDetailsService;
+    UserService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -81,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     	@Override
         public void onAuthenticationSuccess(HttpServletRequest request,
                                             HttpServletResponse response, Authentication authentication)
-                throws IOException, ServletException {
+                throws IOException {
     		HttpSession session = request.getSession(false);
     		  if (session != null) {
     		        session.setMaxInactiveInterval(0);
@@ -90,14 +89,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             response.setContentType("application/json;charset=UTF-8");
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             User user = (User) authentication.getPrincipal();
-            String json = ow.writeValueAsString(user.entityToDTO());
+            String json = ow.writeValueAsString(userDetailsService.entityToDto(user));
             response.getWriter().write(json);
         }
     }
     private class AuthentificationLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                    Authentication authentication) throws IOException, ServletException {
+                                    Authentication authentication) {
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }

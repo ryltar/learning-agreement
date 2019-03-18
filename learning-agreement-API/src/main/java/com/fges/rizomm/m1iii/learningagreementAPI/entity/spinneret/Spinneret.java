@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Spinneret")
+@Table(name = "spinneret")
 public class Spinneret extends LearningEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;

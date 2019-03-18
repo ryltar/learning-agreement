@@ -5,6 +5,7 @@ import com.fges.rizomm.m1iii.learningagreementAPI.entity.course.Course;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.host_establishment.HostEstablishment;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Partner;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Rpi;
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,6 @@ public class Form extends LearningEntity<Long> implements Serializable {
     private List<Course> courses;
     @ManyToOne
     private HostEstablishment hostEstablishment;
+    @ManyToOne
+    private Student student;
 }

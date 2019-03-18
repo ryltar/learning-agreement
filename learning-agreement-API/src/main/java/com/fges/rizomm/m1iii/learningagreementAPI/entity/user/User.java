@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.*;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.UserDTO;
+import lombok.AllArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,9 +27,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE_ACCOUNT")
-@Table(name = "Users")
+@AllArgsConstructor
+@Table(name = "USERS")
 public class User extends LearningEntity<Long> implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -124,7 +123,4 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         }
     }
 
-    public UserDTO entityToDTO(){
-        return new UserDTO(this.username, this.firstname, this.lastname, this.roles, this.enabled, this.password);
-    }
 }

@@ -5,11 +5,13 @@ import java.util.Collection;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.util.RoleEnum;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO {
+@NoArgsConstructor
+public class UserDTO  {
 	
 	private Long idUser;
 
@@ -24,8 +26,6 @@ public class UserDTO {
 	private String password;
 
 	private boolean enabled;
-	
-	public UserDTO() {	}
 	
 	
 	public UserDTO(String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled, String password) {
@@ -46,8 +46,5 @@ public class UserDTO {
 		this.enabled = enabled;
 	}
 
-	public User dtoToEntity(){
-		return new User(this.username, this.firstname, this.getLastname(), this.getRoles());
-	}
 }
 

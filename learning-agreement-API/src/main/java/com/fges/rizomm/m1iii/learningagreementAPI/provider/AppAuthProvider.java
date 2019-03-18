@@ -1,6 +1,6 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.provider;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserServiceImpl;
+import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserService;
 import com.fges.rizomm.m1iii.learningagreementAPI.util.BCryptManagerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class AppAuthProvider extends DaoAuthenticationProvider {
     @Autowired
-    UserServiceImpl userDetailsService;
+    UserService userDetailsService;
 
     @Autowired
     BCryptManagerUtil bcrypt;
