@@ -16,7 +16,7 @@ public class FormController {
     IFormService formService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<FormDTO> findAllSpinnerets() {
+    public List<FormDTO> findAllForms() {
         return this.formService.findAll();
     }
 
