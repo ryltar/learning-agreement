@@ -6,8 +6,6 @@ import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 
 public interface IUserService {
 
-	//List<UserDTO> getUsers(Long idSite);
-
 	User findById(Long idUser);
 
 	UserDTO getUserById(Long id);
@@ -23,5 +21,7 @@ public interface IUserService {
 	UserDTO setPassword(UserDTO userDTO);
 
 	UserDTO updateUser(UserDTO userDto);
+
+	List<UserDTO> getUsers();
 
 }

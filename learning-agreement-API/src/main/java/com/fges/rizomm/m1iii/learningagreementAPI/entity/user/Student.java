@@ -15,6 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @DiscriminatorValue("STUDENT")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student extends User {
 
     @ManyToMany(cascade = { CascadeType.ALL })

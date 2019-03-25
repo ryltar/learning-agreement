@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserDTO  {
 	
-	private Long idUser;
+	private Long id;
 
 	private String username;
 
@@ -38,7 +38,7 @@ public class UserDTO  {
 	}
 	
 	public UserDTO(Long idUser, String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled) {
-		this.idUser = idUser;
+		this.id = idUser;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;

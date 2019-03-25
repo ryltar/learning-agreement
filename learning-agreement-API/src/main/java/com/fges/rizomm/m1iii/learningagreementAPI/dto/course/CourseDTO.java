@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseDTO {
+    private Long id;
     private String titleCourse;
     private int nbrCredits;
     private int nbrEcts;

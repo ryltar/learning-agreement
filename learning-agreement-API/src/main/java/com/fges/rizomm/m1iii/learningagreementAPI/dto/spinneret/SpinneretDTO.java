@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SpinneretDTO {
 
+    private Long id;
     private String level;
     private String label;
     private List<StudentDTO> students;
