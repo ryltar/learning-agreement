@@ -20,17 +20,17 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO findOneCourse(@PathVariable Long id) {
+	public UserDTO findOneUser(@PathVariable Long id) {
 		return this.userService.findOne(id);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO addCourse(@RequestBody UserDTO courseDTO) {
+	public UserDTO addUser(@RequestBody UserDTO courseDTO) {
 		return this.userService.addUser(courseDTO);
 	}
 
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO editCourse(@RequestBody UserDTO userDTO, @PathVariable Long id) {
+	public UserDTO editUser(@RequestBody UserDTO userDTO, @PathVariable Long id) {
 		return this.userService.updateUser(userDTO, id);
 	}
 
