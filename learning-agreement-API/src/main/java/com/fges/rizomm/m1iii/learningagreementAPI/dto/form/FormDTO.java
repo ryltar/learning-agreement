@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FormDTO {
+    private Long id;
     private int schoolYearStart;
     private int schoolYearEnd;
     private short semester;
@@ -25,5 +26,8 @@ public class FormDTO {
     private Partner partner;
     private List<Course> courses;
     private HostEstablishmentDTO hostEstablishmentDTO;
+    private boolean isClosed;
+    private Date createdAt;
+    private Date lastModified;
 
 }

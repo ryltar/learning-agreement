@@ -14,10 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Transactional
@@ -52,7 +50,6 @@ public class UserService extends SuperService<User,UserDTO>  implements IUserSer
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Objects.requireNonNull(email);
         return userRepository.findUserWithName(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
@@ -62,11 +59,6 @@ public class UserService extends SuperService<User,UserDTO>  implements IUserSer
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Collection<RoleEnum> roles = userDetails.getRoles();
 		return this.entityListToDtoList(userRepository.findByCurrentRole(roles.toArray()[0].toString()));
-	}
-
-	@Override
-	public User findById(Long idUser) {
-		return userRepository.findById(idUser).get();
 	}
 
     @Override
@@ -82,43 +74,6 @@ public class UserService extends SuperService<User,UserDTO>  implements IUserSer
     @Override
     public UserDTO getUserById(Long id) {
 	    User user = userRepository.findById(id).get();
-        return this.entityToDto(user);
-    }
-
-    @Override
-    public void changeUserStatus(Long idUser) {
-        User user = userRepository.findById(idUser).get();
-        user.setEnabled(!user.isEnabled());
-        userRepository.save(user);
-    }
-
-    @Override
-    public UserDTO getUserDtoByEmail(String email) {
-	    User user = userRepository.findByUsername(email);
-        return this.entityToDto(user);
-    }
-
-    @Override
-    public User getUserByUsername(String email) {
-        return userRepository.findByUsername(email);
-    }
-
-    @Override
-    public UserDTO getUserByToken(String token) {
-        User user = userRepository.findByToken(token);
-        if (user != null){
-            return this.entityToDto(user);
-        }
-        return null;
-    }
-
-    @Override
-    public UserDTO setPassword(UserDTO userDTO) {
-        User user = userRepository.findById(userDTO.getId()).get();
-        user.setPassword(userDTO.getPassword());
-        user.setPassHasBeenSet(true);
-        user.setEnabled(true);
-        user = userRepository.save(user);
         return this.entityToDto(user);
     }
 

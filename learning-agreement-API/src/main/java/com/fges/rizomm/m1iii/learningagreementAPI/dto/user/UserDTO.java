@@ -26,8 +26,7 @@ public class UserDTO  {
 	private String password;
 
 	private boolean enabled;
-	
-	
+
 	public UserDTO(String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled, String password) {
 		this.username = username;
 		this.firstname = firstname;
@@ -36,7 +35,7 @@ public class UserDTO  {
 		this.enabled = enabled;
 		this.password = password;
 	}
-	
+
 	public UserDTO(Long idUser, String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled) {
 		this.id = idUser;
 		this.username = username;

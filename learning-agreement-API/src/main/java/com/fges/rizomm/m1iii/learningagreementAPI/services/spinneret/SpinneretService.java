@@ -1,11 +1,8 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.services.spinneret;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.dto.course.CourseDTO;
 import com.fges.rizomm.m1iii.learningagreementAPI.dto.spinneret.SpinneretDTO;
-import com.fges.rizomm.m1iii.learningagreementAPI.entity.course.Course;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.spinneret.Spinneret;
-import com.fges.rizomm.m1iii.learningagreementAPI.exception.courseNotFound.CourseNotFoundException;
-import com.fges.rizomm.m1iii.learningagreementAPI.repository.course.CourseRepository;
+import com.fges.rizomm.m1iii.learningagreementAPI.exception.spinneretNotFound.SpinneretNotFoundException;
 import com.fges.rizomm.m1iii.learningagreementAPI.repository.spinneret.SpinneretRepository;
 import com.fges.rizomm.m1iii.learningagreementAPI.services.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +44,7 @@ public class SpinneretService extends SuperService<Spinneret, SpinneretDTO> impl
 
     @Override
     public SpinneretDTO findOne(Long id) {
-        return this.entityToDto(this.spinneretRepository.findById(id).orElseThrow(() -> new CourseNotFoundException(id)));
+        return this.entityToDto(this.spinneretRepository.findById(id).orElseThrow(() -> new SpinneretNotFoundException(id)));
     }
 
     @Override
@@ -55,14 +52,14 @@ public class SpinneretService extends SuperService<Spinneret, SpinneretDTO> impl
         return this.spinneretRepository.findById(id).map(course -> {
             spinneretDTO.setId(id);
             return this.entityToDto(this.spinneretRepository.save(this.dtoToEntity(spinneretDTO)));
-        }).orElseThrow(() -> new CourseNotFoundException(id));
+        }).orElseThrow(() -> new SpinneretNotFoundException(id));
 
     }
 
     @Override
     public void deleteSpinneret(Long id) {
-        Spinneret courseToDelete = this.spinneretRepository.findById(id).orElseThrow(() -> new CourseNotFoundException(id));
-        this.spinneretRepository.delete(courseToDelete);
+        Spinneret spinneretToDelete = this.spinneretRepository.findById(id).orElseThrow(() -> new SpinneretNotFoundException(id));
+        this.spinneretRepository.delete(spinneretToDelete);
     }
 
 }

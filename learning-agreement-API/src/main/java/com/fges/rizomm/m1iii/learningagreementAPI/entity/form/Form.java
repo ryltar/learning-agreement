@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,4 +38,9 @@ public class Form extends LearningEntity<Long> implements Serializable {
     private HostEstablishment hostEstablishment;
     @ManyToOne
     private Student student;
+    @CreatedDate
+    private Date createdAt;
+    private Date lastModified;
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean isClosed;
 }

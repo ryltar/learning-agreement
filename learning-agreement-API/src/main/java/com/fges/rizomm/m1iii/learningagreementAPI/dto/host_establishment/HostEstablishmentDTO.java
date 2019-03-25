@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HostEstablishmentDTO {
+    private Long id;
     private String name;
     private String country;
     private List<PartnerDTO> partners;
