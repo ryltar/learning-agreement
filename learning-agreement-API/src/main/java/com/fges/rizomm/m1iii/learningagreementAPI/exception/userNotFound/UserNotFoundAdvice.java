@@ -1,4 +1,4 @@
-package com.fges.rizomm.m1iii.learningagreementAPI.exception.hostEstablishmentNotFound;
+package com.fges.rizomm.m1iii.learningagreementAPI.exception.userNotFound;
 
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class HostEstablishmentNotFoundAdvice {
+public class UserNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(HostEstablishmentNotFoundException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    JSONObject hostEstablishmentNotFoundHandler(HostEstablishmentNotFoundException ex) {
+    JSONObject spinneretNotFoundHandler(UserNotFoundException ex) {
         JSONObject response = new JSONObject();
         response.put("message", ex.getMessage());
         return response;

@@ -2,11 +2,14 @@ package com.fges.rizomm.m1iii.learningagreementAPI.dto.user;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.util.RoleEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.management.relation.Role;
 
 @Getter
 @Setter
@@ -21,11 +24,19 @@ public class UserDTO  {
 
 	private String lastname;
 
+	@JsonIgnore
 	private Collection<RoleEnum> roles;
+
+	private RoleEnum role;
 
 	private String password;
 
 	private boolean enabled;
+
+	public void setRoles(Collection<RoleEnum> roles) {
+		this.roles = roles;
+		this.role = (RoleEnum) this.roles.toArray()[0];
+	}
 
 	public UserDTO(String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled, String password) {
 		this.username = username;

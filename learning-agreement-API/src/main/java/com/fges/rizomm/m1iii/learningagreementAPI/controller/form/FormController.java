@@ -21,7 +21,7 @@ public class FormController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public FormDTO findOneCourse(@PathVariable Long id) {
+    public FormDTO findOneForm(@PathVariable Long id) {
         return this.formService.findOne(id);
     }
 

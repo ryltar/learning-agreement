@@ -117,10 +117,4 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
-    public void setPassword(String password) {
-        if (!password.isEmpty()) {
-            this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        }
-    }
-
 }

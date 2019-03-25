@@ -24,7 +24,5 @@ public class Spinneret extends LearningEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     private String level;
     private String label;
-    @ManyToMany(mappedBy = "spinnerets")
-    private List<Student> students;
 
 }

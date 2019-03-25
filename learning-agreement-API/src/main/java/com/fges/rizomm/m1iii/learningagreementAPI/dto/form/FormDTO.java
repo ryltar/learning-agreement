@@ -1,8 +1,6 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.dto.form;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.dto.host_establishment.HostEstablishmentDTO;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.course.Course;
-import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Partner;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Rpi;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +21,8 @@ public class FormDTO {
     private short semester;
     private Date signatureDate;
     private Rpi rpi;
-    private Partner partner;
     private List<Course> courses;
-    private HostEstablishmentDTO hostEstablishmentDTO;
+    private String hostEstablishment;
     private boolean isClosed;
     private Date createdAt;
     private Date lastModified;
