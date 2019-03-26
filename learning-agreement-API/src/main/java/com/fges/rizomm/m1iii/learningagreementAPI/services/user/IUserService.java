@@ -15,5 +15,5 @@ public interface IUserService {
 
 	UserDTO addUser(UserDTO userDTO);
 
-	UserDTO matchUser(User user, UserDTO userDTO, List<RoleEnum> roleEnumList);
+	UserDTO matchUser(UserDTO userDTO, List<RoleEnum> roleEnumList);
 }

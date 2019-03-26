@@ -25,8 +25,8 @@ public class UserController {
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO addUser(@RequestBody UserDTO courseDTO) {
-		return this.userService.addUser(courseDTO);
+	public UserDTO addUser(@RequestBody UserDTO userDTO) {
+		return this.userService.addUser(userDTO);
 	}
 
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

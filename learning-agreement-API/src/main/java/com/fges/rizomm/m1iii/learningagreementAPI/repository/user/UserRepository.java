@@ -15,6 +15,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	User findByUsername(String email);
 
-	@Query("select u from User u where u.token = ?1 and u.passHasBeenSet = false")
-	User findByToken(String token);
 }

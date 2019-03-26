@@ -1,5 +1,7 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.services.user;
 
+import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.RpiDTO;
+import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.StudentDTO;
 import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.UserDTO;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Admin;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.Rpi;
@@ -11,15 +13,12 @@ import com.fges.rizomm.m1iii.learningagreementAPI.services.SuperService;
 import com.fges.rizomm.m1iii.learningagreementAPI.util.BCryptManagerUtil;
 import com.fges.rizomm.m1iii.learningagreementAPI.util.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,11 +46,9 @@ public class UserService extends SuperService<User,UserDTO>  implements IUserSer
 
     @Override
     public UserDTO addUser(UserDTO userDTO) {
-		User user = this.dtoToEntity(userDTO);
-		user.setToken(Long.toString(System.currentTimeMillis()));
-		user.setPassword(BCryptManagerUtil.passwordencoder().encode(userDTO.getPassword()));
+        userDTO.setPassword(BCryptManagerUtil.passwordencoder().encode(userDTO.getPassword()));
 		List<RoleEnum> roleEnumList = Collections.singletonList(RoleEnum.STUDENT);
-		return this.matchUser(user, userDTO, roleEnumList);
+		return this.matchUser(userDTO, roleEnumList);
     }
 
     @Override
@@ -79,26 +76,34 @@ public class UserService extends SuperService<User,UserDTO>  implements IUserSer
             if (!bcrypt.passwordMatch(previousUser.getPassword(), newUser.getPassword())) {
                 newUser.setPassword(this.bcrypt.getPasswordEncoder().encode(newUser.getPassword()));
             }
-            return matchUser(newUser, userDto, roleEnumList);
+            return matchUser(userDto, roleEnumList);
         }).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
-    public UserDTO matchUser(User user, UserDTO userDTO, List<RoleEnum> roleEnumList) {
-        switch (userDTO.getRole()) {
-            case ADMIN:
-                Admin admin = (Admin) user;
-                return this.entityToDto(userRepository.save(admin));
-            case STUDENT:
-                Student student = (Student) user;
-                return this.entityToDto(userRepository.save(student));
-            case RPI:
-                Rpi rpi = (Rpi) user;
-                return this.entityToDto(userRepository.save(rpi));
-            default:
-                user.setRoles(roleEnumList);
-                student = (Student) user;
-                return this.entityToDto(userRepository.save(student));
+    public UserDTO matchUser(UserDTO userDTO, List<RoleEnum> roleEnumList) {
+        if (userDTO.getRole() != null) {
+            switch (userDTO.getRole()) {
+                case ADMIN:
+                    //User admin = (Admin) userDTO;
+                    //return this.entityToDto(userRepository.save(admin));
+                case STUDENT:
+                    Student student = new Student(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstname(), userDTO.getLastname(), userDTO.getRoles());
+                    return super.getMapper().map(userRepository.save(student), StudentDTO.class);
+                case RPI:
+                    Rpi rpi = new Rpi(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstname(), userDTO.getLastname(), userDTO.getRoles());
+                    return super.getMapper().map(userRepository.save(rpi), RpiDTO.class);
+                default:
+                    student = new Student(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstname(), userDTO.getLastname(), userDTO.getRoles());
+                    student.setRoles(roleEnumList);
+                    return super.getMapper().map(userRepository.save(student), StudentDTO.class);
+            }
+        } else {
+            Student student = new Student(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstname(), userDTO.getLastname(), userDTO.getRoles());
+            student.setRoles(roleEnumList);
+            return super.getMapper().map(userRepository.save(student), StudentDTO.class);
         }
+
+
     }
 }

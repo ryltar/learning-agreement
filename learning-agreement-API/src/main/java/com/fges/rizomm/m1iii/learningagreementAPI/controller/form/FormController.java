@@ -26,13 +26,13 @@ public class FormController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public FormDTO addForm(@RequestBody FormDTO courseDTO) {
-        return this.formService.addForm(courseDTO);
+    public FormDTO addForm(@RequestBody FormDTO formDTO) {
+        return this.formService.addForm(formDTO);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public FormDTO editForm(@RequestBody FormDTO courseDTO, @PathVariable Long id) {
-        return this.formService.editForm(courseDTO, id);
+    public FormDTO editForm(@RequestBody FormDTO formDTO, @PathVariable Long id) {
+        return this.formService.editForm(formDTO, id);
     }
 
     @DeleteMapping(value = "/{id}")

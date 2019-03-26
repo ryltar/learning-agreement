@@ -72,16 +72,14 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
     @JsonIgnore
     private boolean enabled;
 
-    private String token;
-
     private boolean passHasBeenSet;
 
     public User() {
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
-        this.enabled = false;
-        this.passHasBeenSet = false;
+        this.enabled = true;
+        this.passHasBeenSet = true;
         this.roles = Collections.singletonList(RoleEnum.ADMIN);
     }
 
@@ -92,8 +90,8 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
-        this.enabled = false;
-        this.passHasBeenSet = false;
+        this.enabled = true;
+        this.passHasBeenSet = true;
         this.roles = roles;
     }
 
@@ -105,8 +103,8 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
-        this.enabled = false;
-        this.passHasBeenSet = false;
+        this.enabled = true;
+        this.passHasBeenSet = true;
         this.roles = roles;
     }
 

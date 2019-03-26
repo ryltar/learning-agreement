@@ -1,6 +1,7 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.dto.user;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
@@ -35,24 +36,33 @@ public class UserDTO  {
 
 	public void setRoles(Collection<RoleEnum> roles) {
 		this.roles = roles;
-		this.role = (RoleEnum) this.roles.toArray()[0];
+		if(this.roles != null && this.roles.size() != 0) {
+			this.role = (RoleEnum) this.roles.toArray()[0];
+		}
 	}
 
-	public UserDTO(String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled, String password) {
+	public void setRole(RoleEnum role) {
+		this.role = role;
+		if(this.role != null) {
+			this.roles = Collections.singletonList(role);
+		}
+	}
+
+	public UserDTO(String username, String firstname, String lastname, RoleEnum role, boolean enabled, String password) {
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.roles = roles;
+		this.roles = Collections.singletonList(role);
 		this.enabled = enabled;
 		this.password = password;
 	}
 
-	public UserDTO(Long idUser, String username, String firstname, String lastname, Collection<RoleEnum> roles, boolean enabled) {
+	public UserDTO(Long idUser, String username, String firstname, String lastname, RoleEnum role, boolean enabled) {
 		this.id = idUser;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.roles = roles;
+		this.roles = Collections.singletonList(role);
 		this.enabled = enabled;
 	}
 
