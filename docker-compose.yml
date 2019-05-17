@@ -1,6 +1,6 @@
 version: '2'
 services:
-   learning-agreement-BDD:
+   learning-agreement-bdd:
      image: postgres
      expose:
        - 5432
@@ -9,22 +9,14 @@ services:
      volumes:
        - ./localdata/postgres:/var/lib/postgresql/data
      environment:
-       - POSTGRES_PASSWORD=<passwordpostgres>
-   learning-agreement-API:
-     image: 136615499317.dkr.ecr.eu-west-1.amazonaws.com/epack-back:latest
+       - POSTGRES_PASSWORD=root
+   learning-agreement-api:
+     build: ./learning-agreement-api
      environment:
-       - datasourceUrl=jdbc:postgresql://epack-bdd:5432/
+       - datasourceUrl=jdbc:postgresql://learning-agreement-BDD:5432/
        - datasourceUsername=postgres
-       - datasourcePassword=<passwordpostgres>
+       - datasourcePassword=root
      ports:
-       - 4300:4300
+       - 8080:8080
      depends_on:
-       - epack-bdd
-   learning-agreement-FRONT:
-     image: 136615499317.dkr.ecr.eu-west-1.amazonaws.com/epack-front:latest
-     environment:
-       - backUrl=http:\/\/learning-agreement-API:4300
-     ports:
-       - 80:4200
-     depends_on:
-       - learning-agreement-API
+       - learning-agreement-bdd

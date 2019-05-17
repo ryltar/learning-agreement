@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .authenticationEntryPoint(new BasicAuthenticationEntryPoint())
                 .and()
                 .authenticationProvider(getProvider());
-        		http
+        		 http
                 .formLogin()
                 .loginProcessingUrl("/api/login")
                 .successHandler(new AuthentificationLoginSuccessHandler())
@@ -72,15 +72,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .authorizeRequests()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/logout").permitAll()
-                .antMatchers("/api/user/getUserByToken/**").permitAll()
-                .antMatchers("/api/user/sendEmailForNewPassword").permitAll()
-                .antMatchers("/api/user/setPassword").permitAll()
-                .antMatchers("/api/**/admin/**").hasAuthority("ADMINISTRATEUR")
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().permitAll();
+                .antMatchers("/api/user").permitAll()
+                .antMatchers("/api/user/passwordForgot").permitAll()
+                .antMatchers("/api/user/resetPassword/**").permitAll()
+                .antMatchers("/api/user/{token}").permitAll()
+                .antMatchers("/api/form/{token}").permitAll()
+                .antMatchers("/api/form/signForm/**").permitAll()
+                .antMatchers("/api/**").authenticated();
     }
-    private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
+    private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     	@Override
         public void onAuthenticationSuccess(HttpServletRequest request,

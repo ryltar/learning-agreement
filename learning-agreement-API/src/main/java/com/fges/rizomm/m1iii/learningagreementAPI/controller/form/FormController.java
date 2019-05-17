@@ -4,6 +4,7 @@ import com.fges.rizomm.m1iii.learningagreementAPI.dto.form.FormDTO;
 import com.fges.rizomm.m1iii.learningagreementAPI.services.form.IFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class FormController {
     IFormService formService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<FormDTO> findAllForms() {
-        return this.formService.findAll();
+    public List<FormDTO> findAllFormsForCurrentUser(Authentication authentication) {
+        return this.formService.findAllForCurrentUsers(authentication);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,5 +39,20 @@ public class FormController {
     @DeleteMapping(value = "/{id}")
     public void deleteForm(@PathVariable Long id) {
         this.formService.deleteForm(id);
+    }
+
+    @PostMapping("/invite")
+    public FormDTO passwordForgot(@RequestBody FormDTO formDTO) {
+        return this.formService.invite(formDTO);
+    }
+
+    @GetMapping("/{token}")
+    public FormDTO getByToken(@PathVariable String token) {
+        return this.formService.getByToken(token);
+    }
+
+    @GetMapping("/signForm/{id}")
+    public FormDTO signFormUniversity(@PathVariable Long id, @RequestBody FormDTO formDTO) {
+        return this.formService.signFormUniversity(id,formDTO);
     }
 }

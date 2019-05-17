@@ -1,9 +1,7 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.services;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.entity.LearningEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 

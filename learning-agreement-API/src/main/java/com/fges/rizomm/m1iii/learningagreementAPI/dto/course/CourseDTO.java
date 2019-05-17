@@ -1,6 +1,5 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.dto.course;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.dto.form.FormDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,5 @@ public class CourseDTO {
     private String titleCourse;
     private int nbrCredits;
     private int nbrEcts;
-    private FormDTO formDTO;
 
 }

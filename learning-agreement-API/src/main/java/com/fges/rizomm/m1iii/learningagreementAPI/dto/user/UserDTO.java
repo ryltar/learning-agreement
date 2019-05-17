@@ -2,8 +2,11 @@ package com.fges.rizomm.m1iii.learningagreementAPI.dto.user;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fges.rizomm.m1iii.learningagreementAPI.dto.spinneret.SpinneretDTO;
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.spinneret.Spinneret;
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.util.RoleEnum;
 import lombok.Getter;
@@ -19,7 +22,7 @@ public class UserDTO  {
 	
 	private Long id;
 
-	private String username;
+	private String email;
 
 	private String firstname;
 
@@ -28,11 +31,17 @@ public class UserDTO  {
 	@JsonIgnore
 	private Collection<RoleEnum> roles;
 
+	private SpinneretDTO spinneret;
+
 	private RoleEnum role;
 
 	private String password;
 
+	private Date birthdate;
+
 	private boolean enabled;
+
+	private String resetToken;
 
 	public void setRoles(Collection<RoleEnum> roles) {
 		this.roles = roles;
@@ -48,8 +57,8 @@ public class UserDTO  {
 		}
 	}
 
-	public UserDTO(String username, String firstname, String lastname, RoleEnum role, boolean enabled, String password) {
-		this.username = username;
+	public UserDTO(String email, String firstname, String lastname, RoleEnum role, boolean enabled, String password) {
+		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.roles = Collections.singletonList(role);
@@ -57,9 +66,9 @@ public class UserDTO  {
 		this.password = password;
 	}
 
-	public UserDTO(Long idUser, String username, String firstname, String lastname, RoleEnum role, boolean enabled) {
+	public UserDTO(Long idUser, String email, String firstname, String lastname, RoleEnum role, boolean enabled) {
 		this.id = idUser;
-		this.username = username;
+		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.roles = Collections.singletonList(role);
