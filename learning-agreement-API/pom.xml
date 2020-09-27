@@ -5,7 +5,7 @@
 
 	<groupId>com.fges.rizomm.m1iii</groupId>
 	<artifactId>learning-agreement-API</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${learning.version}</version>
 	<packaging>jar</packaging>
 
 	<name>learning-agreement-API</name>
@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<learning.version>0.0.1-SNAPSHOT</learning.version>
 	</properties>
 
 	<dependencies>
@@ -32,6 +33,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 
 		<dependency>
@@ -47,8 +58,26 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 
 		<dependency>
@@ -63,6 +92,13 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -70,6 +106,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>2.0.7</version>
+				<configuration>
+					<appName>learning-agreement-api</appName>
+					<processTypes>
+						<web>java -Dserver.port=$PORT -jar target/learning-agreement-API-${learning.version}.jar</web>
+					</processTypes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

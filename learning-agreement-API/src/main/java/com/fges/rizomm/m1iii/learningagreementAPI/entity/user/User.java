@@ -1,27 +1,18 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.entity.user;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import com.fges.rizomm.m1iii.learningagreementAPI.dto.user.UserDTO;
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.form.Form;
+import com.fges.rizomm.m1iii.learningagreementAPI.entity.spinneret.Spinneret;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import lombok.AllArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,11 +29,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Users")
+@AllArgsConstructor
+@Table(name = "USERS")
 public class User extends LearningEntity<Long> implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 
+    @Ignore
     private String username;
 
     private String firstname;
@@ -52,6 +45,21 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
     private String email;
 
     private String urlSignature;
+
+    private String resetToken;
+
+    @ManyToOne
+    @Cascade(value = CascadeType.ALL)
+    @JoinColumn(name="rpi_id")
+    private User rpi;
+
+    @OneToMany(mappedBy="rpi")
+    private Set<User> userList = new HashSet<>();
+
+    @OneToOne(orphanRemoval = true)
+    @Cascade(value = CascadeType.ALL)
+    @JoinColumn(name = "spinneret_id", referencedColumnName = "id")
+    private Spinneret spinneret;
 
     @JsonIgnore
     private String password;
@@ -82,41 +90,42 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
     @JsonIgnore
     private boolean enabled;
 
-    private String token;
-
     private boolean passHasBeenSet;
 
+    /*@OneToMany(mappedBy = "student", cascade = javax.persistence.CascadeType.ALL)
+    private Set<Form> forms;
+    */
     public User() {
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
-        this.enabled = false;
-        this.passHasBeenSet = false;
+        this.enabled = true;
+        this.passHasBeenSet = true;
         this.roles = Collections.singletonList(RoleEnum.ADMIN);
     }
 
-    public User(String username, String firstname, String lastname, Collection<RoleEnum> roles) {
-        this.username = username;
+    public User(String email, String firstname, String lastname, Collection<RoleEnum> roles) {
+        this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
-        this.enabled = false;
-        this.passHasBeenSet = false;
+        this.enabled = true;
+        this.passHasBeenSet = true;
         this.roles = roles;
     }
 
-    public User(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
-        this.username = username;
+    public User(String email, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
+        this.email = email;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
         this.firstname = firstname;
         this.lastname = lastname;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
-        this.enabled = false;
-        this.passHasBeenSet = false;
+        this.enabled = true;
+        this.passHasBeenSet = true;
         this.roles = roles;
     }
 
@@ -127,13 +136,4 @@ public class User extends LearningEntity<Long> implements Serializable, UserDeta
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
-    public void setPassword(String password) {
-        if (!password.isEmpty()) {
-            this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        }
-    }
-
-    public UserDTO entityToDTO(){
-        return new UserDTO(this.username, this.firstname, this.lastname, this.roles, this.enabled, this.password);
-    }
 }

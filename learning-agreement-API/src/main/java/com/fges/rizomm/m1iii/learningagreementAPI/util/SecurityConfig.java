@@ -1,15 +1,15 @@
 package com.fges.rizomm.m1iii.learningagreementAPI.util;
 
 import java.io.IOException;
+import java.util.Arrays;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fges.rizomm.m1iii.learningagreementAPI.entity.user.User;
 import com.fges.rizomm.m1iii.learningagreementAPI.provider.AppAuthProvider;
-import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserServiceImpl;
+import com.fges.rizomm.m1iii.learningagreementAPI.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +18,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -33,7 +37,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     @Autowired
-    UserServiceImpl userDetailsService;
+    UserService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .authenticationEntryPoint(new BasicAuthenticationEntryPoint())
                 .and()
                 .authenticationProvider(getProvider());
-        		http
+        		 http
                 .formLogin()
                 .loginProcessingUrl("/api/login")
                 .successHandler(new AuthentificationLoginSuccessHandler())
@@ -68,20 +72,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .authorizeRequests()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/logout").permitAll()
-                .antMatchers("/api/user/getUserByToken/**").permitAll()
-                .antMatchers("/api/user/sendEmailForNewPassword").permitAll()
-                .antMatchers("/api/user/setPassword").permitAll()
-                .antMatchers("/api/**/admin/**").hasAuthority("ADMINISTRATEUR")
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().permitAll();
+                .antMatchers("/api/user").permitAll()
+                .antMatchers("/api/user/passwordForgot").permitAll()
+                .antMatchers("/api/user/resetPassword/**").permitAll()
+                .antMatchers("/api/user/{token}").permitAll()
+                .antMatchers("/api/form/{token}").permitAll()
+                .antMatchers("/api/form/signForm/**").permitAll()
+                .antMatchers("/api/**").authenticated();
     }
-    private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
+    private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     	@Override
         public void onAuthenticationSuccess(HttpServletRequest request,
                                             HttpServletResponse response, Authentication authentication)
-                throws IOException, ServletException {
+                throws IOException {
     		HttpSession session = request.getSession(false);
     		  if (session != null) {
     		        session.setMaxInactiveInterval(0);
@@ -90,14 +95,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             response.setContentType("application/json;charset=UTF-8");
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             User user = (User) authentication.getPrincipal();
-            String json = ow.writeValueAsString(user.entityToDTO());
+            String json = ow.writeValueAsString(userDetailsService.entityToDto(user));
             response.getWriter().write(json);
         }
     }
+
+    /**
+     * CORS configuration for the Application's security layer.
+     * <p>
+     * Allow all routes with any headers and methods.
+     *
+     * @return the {@link CorsConfigurationSource} for the Application's security layer.
+     */
+    @Bean
+    protected CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+
     private class AuthentificationLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                    Authentication authentication) throws IOException, ServletException {
+                                    Authentication authentication) {
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
